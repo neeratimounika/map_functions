@@ -1,28 +1,25 @@
-import {React, useState} from 'react'
+import React, { useState } from 'react'
+
+import './App.css'
 
 const App = () => {
-  
-
-  let [product,updatedProduct]=useState({
-    pname:'Real me 10 pro',
-    price:16000
-  })
+  let [counter,setCounter]=useState(0);
+  let stock=10;
 
   return (
-    <div>
-      <h1>Product:{product.pname}</h1>
-      <p>Price:{product.price}</p>
-
-      <input id='pname'/>
-      <button onClick={()=>{
-        let mprice = document.getElementById('pname').value;
-        updatedProduct({
-          ...product,
-          price:mprice,
-
-
-        })
-      }}>Update</button>
+    <div className='wrapper'>
+      <button className='minus' disabled={counter===0} onClick={()=>{
+        if(counter>0){
+          setCounter(counter-1)
+        }
+      }}>-</button>
+      <p>{counter}</p>
+      <button className='plus' onClick={()=>{
+        if(counter<stock){
+          setCounter(counter+1)
+        }
+      }}>+</button>
+      
     </div>
   )
 }

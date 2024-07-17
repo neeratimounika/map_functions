@@ -36,3 +36,31 @@
     transform: rotate(360deg);
   }
 }
+
+body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.wrapper{
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+.wrapper button{
+  border:none;
+  outline: none;
+  padding: 10px 15px;
+  font-size: 22px;
+}
+button.plus{
+  background-color: blue;
+}
+button.minus{
+  background-color: red;
+}
+
+button:disabled{
+  opacity: 0.6;
+}
