@@ -1,45 +1,34 @@
-import { useEffect, useState } from "react";
-import ProductCard from "./ProductCard";
+import React from 'react'
+import Home from './Home'
+import Contact from './Contact'
+import About from './About'
+import { BrowserRouter, Link, Route, Routes } from 'react-router-dom'
 
-import './App.css'
+function Header(){
 
+  return(
+    <ul>
+      <li><Link to='/'>Home</Link></li>
+      <li><Link to='/about'>About</Link></li>
+      <li><Link to='/contact'>Countact</Link></li>
+    </ul>
+  )
+}
 
-function App() {
-    const [products, updateProducts] = useState([]);
+function App (){
 
+  
+  return (
+    <BrowserRouter>
+    <Header/>
+    <Routes>
+      <Route exact path='/' element={<Home/>}/>
+      <Route exact path='/about' element={<About/>}/>
+      <Route exact path ='/contact' element={<Contact/>}/>
 
-    useEffect(
-        () => {
-            getProducts()
-
-        }, []
-    )
-
-
-    async function getProducts() {
-        let res = await fetch("https://fakestoreapi.com/products");
-        let productlist = await res.json();
-        updateProducts(productlist)
-
-
-    }
-
-
-
-    if (products.length === 0) {
-        return (<h1>Fetching data...</h1>)
-    }
-
-    return (
-        <>
-            <div className="product-list">
-                {
-                    products.map((p) => <ProductCard   {...p} key={p.id} ></ProductCard>)
-                }
-
-            </div>
-        </>
-    )
+    </Routes>
+    </BrowserRouter>
+  )
 }
 
 export default App
