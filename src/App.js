@@ -1,27 +1,45 @@
-import React, { useState } from 'react'
+import { useEffect, useState } from "react";
+import ProductCard from "./ProductCard";
 
 import './App.css'
 
-const App = () => {
-  let [counter,setCounter]=useState(0);
-  let stock=10;
 
-  return (
-    <div className='wrapper'>
-      <button className='minus' disabled={counter===0} onClick={()=>{
-        if(counter>0){
-          setCounter(counter-1)
-        }
-      }}>-</button>
-      <p>{counter}</p>
-      <button className='plus' onClick={()=>{
-        if(counter<stock){
-          setCounter(counter+1)
-        }
-      }}>+</button>
-      
-    </div>
-  )
+function App() {
+    const [products, updateProducts] = useState([]);
+
+
+    useEffect(
+        () => {
+            getProducts()
+
+        }, []
+    )
+
+
+    async function getProducts() {
+        let res = await fetch("https://fakestoreapi.com/products");
+        let productlist = await res.json();
+        updateProducts(productlist)
+
+
+    }
+
+
+
+    if (products.length === 0) {
+        return (<h1>Fetching data...</h1>)
+    }
+
+    return (
+        <>
+            <div className="product-list">
+                {
+                    products.map((p) => <ProductCard   {...p} key={p.id} ></ProductCard>)
+                }
+
+            </div>
+        </>
+    )
 }
 
 export default App
