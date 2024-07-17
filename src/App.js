@@ -1,38 +1,29 @@
-import React from 'react'
-import Greet from './Greet'
+import {React, useState} from 'react'
 
 const App = () => {
+  
 
-  let users=[
-    {id:1,
-    name:'mounika',
-    age:32,
-    place:'hyderabad'
-},
-{
-  id:2,
-  name:'vedansh',
-  age:4,
-  place:'del'
-},
-{
-  id:3,
-  name:'ramesh',
-  age:36,
-  place:'bpl'
-}
-  ]
+  let [product,updatedProduct]=useState({
+    pname:'Real me 10 pro',
+    price:16000
+  })
 
   return (
-    <>
-   {
-    users.map(
-      (u)=>{
-        return <Greet key={u.id} id={u.id} name={u.name} place={u.place} age={u.age}/>
-      }
-    )
-   }
-    </>
+    <div>
+      <h1>Product:{product.pname}</h1>
+      <p>Price:{product.price}</p>
+
+      <input id='pname'/>
+      <button onClick={()=>{
+        let mprice = document.getElementById('pname').value;
+        updatedProduct({
+          ...product,
+          price:mprice,
+
+
+        })
+      }}>Update</button>
+    </div>
   )
 }
 
